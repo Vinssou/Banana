@@ -71,6 +71,8 @@ To increase the convergence of the neural network we use a probability distribut
 ### Optimization with a Sum tree
 Using a sum tree allows us to find the experience that has the biggest error. The sum is a binary tree where the parent node is equal to the sum of its direct children.
 We use all the leaves to store the experiences. Each leaf stores its priority aside its experience (state, action, rewards, next state, done). When adding an experience in the tree, the priority is updated according to the experience error. Then we update all the parents nodes' values until we reach the root. By definition the root contains the sum of all priority of the entire tree.
+
+![alt text](https://github.com/Vinssou/Banana/blob/master/SumTree.png)
  
 The tree has been implemented in an optimal way, using continuous memory data structure and iterative algorithms to navigate inside the tree. And to maximise it, it uses interanlly a buffer where the size is a power of 2, to use all leaves.
 
