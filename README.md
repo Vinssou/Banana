@@ -39,7 +39,7 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 ### Train the agent
 
-Run the cells in `Navigation.ipynb` to train the agent.
+Run the cells in [`Navigation.ipynb`](https://github.com/Vinssou/Banana/blob/master/Navigation.ipynb) to train the agent.
 
 ### Visualize the agent
 
