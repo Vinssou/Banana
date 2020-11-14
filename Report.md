@@ -72,14 +72,43 @@ To increase the convergence of the neural network we use a probability distribut
 Using a sum tree allows us to find the experience that has the biggest error. The sum is a binary tree where the parent node is equal to the sum of its direct children.
 We use all the leaves to store the experiences. Each leaf stores its priority aside its experience (state, action, rewards, next state, done). When adding an experience in the tree, the priority is updated according to the experience error. Then we update all the parents nodes' values until we reach the root. By definition the root contains the sum of all priority of the entire tree.
  
-The tree has been implemented in an optimal way, using continuous memory data structure and iterative algorithms to navigate inside the tree.
+The tree has been implemented in an optimal way, using continuous memory data structure and iterative algorithms to navigate inside the tree. And to maximise it, it uses interanlly a buffer where the size is a power of 2, to use all leaves.
 
 ### Adapting the weight
 To avoid a big impact on the experiences that will be selected more often, we use a formula to compute the weight. The weights are considered when computing the loss to stabilize the algorithm.
   
  [Reference: PRIORITIZED EXPERIENCE REPLAY ](https://arxiv.org/pdf/1511.05952.pdf)
-## Conclusion
- 
+
+## Results and Hyperparameters
+
+### Graph showing the average reward accumulated in the last 100 episods
+
+![alt text](https://github.com/Vinssou/Banana/blob/master/score.png)
+
+### Hyperparameters
+```
+gamma: 0.99 
+tau_soft: 0.001 
+tau_hard: 100 
+use_soft_update: True 
+learning_rate: 0.0005 
+learning_step_count: 4 
+eps_min: 0.03 
+eps_deacy: 0.99995 
+buffer_size: 10000 
+batch_size: 64 
+use_prioritized_buffer: False 
+memory_epsilon: 0.01 
+memory_alpha: 0.5 
+memory_beta: 0.4 
+
+```
 The D3QN implemented has a lot of hyper parameter, we can have a priority replay buffer or just a simple replay buffer, we can have a soft update target or a hard update with, each of them have different parameters, the learning rate, number of hidden layers, and their number of neurons etc.. The amount of parameters is huge, and their combination makes the algorithm hard to tune.
  
 Developing a tool that tries the algorithm with a various set of parameters could help to tune the algorithm.
+
+
+
+## Conclusion
+ 
+To conclude 
