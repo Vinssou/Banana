@@ -42,22 +42,15 @@ To increase the convergence of the neural network we use a probability distribut
 ### Optimization with a Sum tree
 Using a sum tree allows us to find the experience that has the biggest error. The sum is a binary tree where the parent node is equal to the sum of its direct children.
 We use all the leaves to store the experiences. Each leaf stores its priority aside its experience (state, action, rewards, next state, done). When adding an experience in the tree, the priority is updated according to the experience error. Then we update all the parents nodes' values until we reach the root. By definition the root contains the sum of all priority of all the leaves of the tree.
- 
- 
 The tree has been implemented in an optimal way, using continuous memory data structure and iterative algorithms to navigate inside the tree. And to maximise it, it uses internally a buffer where the size is a power of 2, to use all leaves.
- 
 ### Adapting the weight
 To avoid a big impact on the experiences that will be selected more often, we use a formula to compute the weight. The weights are considered when computing the loss to stabilize the algorithm.
- [Reference: PRIORITIZED EXPERIENCE REPLAY ](https://arxiv.org/pdf/1511.05952.pdf)
- 
+[Reference: PRIORITIZED EXPERIENCE REPLAY ](https://arxiv.org/pdf/1511.05952.pdf)
 ## Results and Hyperparameters
- 
 ### Graph showing the average reward accumulated in the last 100 episodes
- 
-![alt text](https://github.com/Vinssou/Banana/blob/master/score.png)
- 
 ### Hyperparameters
 ```
+Hyper Parameters:
 gamma: 0.99
 tau_soft: 0.001
 tau_hard: 100
@@ -68,35 +61,49 @@ eps_min: 0.03
 eps_deacy: 0.99995
 buffer_size: 10000
 batch_size: 64
-use_prioritized_buffer: False
+use_prioritized_buffer: True
 memory_epsilon: 0.01
-memory_alpha: 0.5
+memory_alpha: 0.4
 memory_beta: 0.4
- 
+capacity:  16384
 ```
+ 
+Note is computed from the buffer_size.
+ 
 The D3QN implemented has a lot of hyper parameter, we can have a priority replay buffer or just a simple replay buffer, we can have a soft update target or a hard update with, each of them have different parameters, the learning rate, number of hidden layers, and their number of neurons etc.. The amount of parameters is huge, and their combination makes the algorithm hard to tune.
 Developing a tool that tries the algorithm with a various set of parameters could help to tune the algorithm.
  
-A simple DQN without a replay buffer could solve the problem quite quickly. The implementation of the replay buffer makes the algorithm slower. Although tree navigation has been optimized the memorized replay remains slower than a normal distribution. Moreover the memorized replay buffer didn't seem to bring any faster convergence. The replay buffer was hard to implement, it required to change the loss function to take into account the weights provided.
- 
+The epsilon decay was tuned to reach the exploitation mode quite quickly and keep taking 3% of action randomly. A simple linear function has been used here, but a logarithmic function could have helped to decrease the randomness slower at the end.
+The soft update seems to bring better results than the hard update, it is hard to compare them because they also have their own parameters that can be tuned separately.
+
 The dueling architecture helped to converge faster.
  
-The epsilon decay was tuned to reach the exploitation mode quite quickly and keep taking 3% of action randomly. A simple linear function has been used here, but a logarithmic function could have helped to decrease the randomness slower at the end.
+![alt text](https://github.com/Vinssou/Banana/blob/master/score.png)
  
-The soft update seems to bring better results than the hard update, it is hard to compare them because they also have their own parameters that can be tuned separately.
- 
- 
-## Conclusion
- 
-It was hard to take advantage of the replay buffer. Maybe a bug in my algorithm remains, but I tested the Sum Tree deeply by looking at all the distribution of priorities in the tree, and everything seemed correct.
- 
+It was hard to take advantage of the replay buffer.
 I think the environment is quite simple, and so the replay buffer couldn't take any advantages.
  
-I should support gpu for my code to be able to tune it more rigorously. 
+![alt text](https://github.com/Vinssou/Banana/blob/master/score_prioritized.png)
  
+### Test
+The out of the last cell ran with the load model
+```
+0 Eps: 0.03 Score: 18.0
+1 Eps: 0.03 Score: 17.0
+2 Eps: 0.03 Score: 17.0
+3 Eps: 0.03 Score: 19.0
+4 Eps: 0.03 Score: 15.0
+5 Eps: 0.03 Score: 18.0
+6 Eps: 0.03 Score: 13.0
+7 Eps: 0.03 Score: 18.0
+8 Eps: 0.03 Score: 23.0
+9 Eps: 0.03 Score: 8.0
+```
  
+## Conclusion
+The prioritized replay buffer didn't bring any speed up in the convergence. I should try to solve other problems, to see if I could get the gain that was experimented in various papers.
  
- 
+I should support GPU for my code to be able to run more experiments and so be able to tune it more rigorously.
  
  
 
