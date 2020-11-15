@@ -67,7 +67,7 @@ memory_beta: 0.4
 capacity:  16384
 ```
  
-Note is computed from the buffer_size.
+Note `capacity` is computed from the buffer_size.
  
 The D3QN implemented has a lot of hyper parameter, we can have a priority replay buffer or just a simple replay buffer, we can have a soft update target or a hard update with, each of them have different parameters, the learning rate, number of hidden layers, and their number of neurons etc.. The amount of parameters is huge, and their combination makes the algorithm hard to tune.
 Developing a tool that tries the algorithm with a various set of parameters could help to tune the algorithm.
