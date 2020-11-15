@@ -34,7 +34,7 @@ Iterating through all states, actions, rewards, next_states and dones to train t
 To train our network we need to have a good balance between exploring the environment, meaning picking an action randomly and exploiting our network to predict the right action.
 We use a linear interpolation starting from exploration to exploitation.
 [Reference: Deep Exploration via Bootstrapped DQN](https://papers.nips.cc/paper/2016/file/8d8818c8e140c64c743113f563cf750f-Paper.pdf)
-## Memory Buffer
+## Prioritized Replay Buffer
 Every experience is stored in a memory to be used to train the model. Each entry is an experience defined by a state, an action, the reward, the next state and a boolean to know if it is the last step of the episode.
 An approach that works is to store a constant number of experiences and pick randomly a batch of experiences.
 ### Finding the experiences that matter
