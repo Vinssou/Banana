@@ -37,6 +37,34 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 3. Place the file in the cloned folder, and unzip (or decompress) the file.
 
+
+### Setup
+
+To set up your python environment to run the code in this repository, follow the instructions below.
+
+1. Create (and activate) a new environment with Python 3.6.
+
+	- __Linux__ or __Mac__: 
+	```bash
+	conda create --name drlnd python=3.6
+	source activate drlnd
+	```
+	- __Windows__: 
+	```bash
+	conda create --name drlnd python=3.6 
+	activate drlnd
+	```
+
+2. Create an [IPython kernel](http://ipython.readthedocs.io/en/stable/install/kernel_install.html) for the `drlnd` environment.  
+```bash
+python -m ipykernel install --user --name drlnd --display-name "drlnd"
+```
+
+3. Before running code in a notebook, change the kernel to match the `drlnd` environment by using the drop-down `Kernel` menu. 
+
+![Kernel][image2]
+
+
 ### Train the agent
 
 Run the cells in [`Navigation.ipynb`](https://github.com/Vinssou/Banana/blob/master/Navigation.ipynb) to train the agent.

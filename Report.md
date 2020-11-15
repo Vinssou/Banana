@@ -69,7 +69,7 @@ capacity:  16384
  
 Note `capacity` is computed from the buffer_size.
  
-The D3QN implemented has a lot of hyper parameter, we can have a priority replay buffer or just a simple replay buffer, we can have a soft update target or a hard update with, each of them have different parameters, the learning rate, number of hidden layers, and their number of neurons etc.. The amount of parameters is huge, and their combination makes the algorithm hard to tune.
+The D3QN implemented has a lot of hyper parameter, we can have a priority replay buffer or just a simple replay buffer, we can have a soft update target or a hard update, each of them have different parameters, the learning rate, number of hidden layers, and their number of neurons etc.. The amount of parameters is huge, and their combination makes the algorithm hard to tune.
 Developing a tool that tries the algorithm with a various set of parameters could help to tune the algorithm.
  
 The epsilon decay was tuned to reach the exploitation mode quite quickly and keep taking 3% of action randomly. A simple linear function has been used here, but a logarithmic function could have helped to decrease the randomness slower at the end.
