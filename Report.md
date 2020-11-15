@@ -47,7 +47,6 @@ The tree has been implemented in an optimal way, using continuous memory data st
 To avoid a big impact on the experiences that will be selected more often, we use a formula to compute the weight. The weights are considered when computing the loss to stabilize the algorithm.
 [Reference: PRIORITIZED EXPERIENCE REPLAY ](https://arxiv.org/pdf/1511.05952.pdf)
 ## Results and Hyperparameters
-### Graph showing the average reward accumulated in the last 100 episodes
 ### Hyperparameters
 ```
 Hyper Parameters:
@@ -81,12 +80,12 @@ The dueling architecture helped to converge faster.
 ![alt text](https://github.com/Vinssou/Banana/blob/master/score.png)
  
 It was hard to take advantage of the replay buffer.
-I think the environment is quite simple, and so the replay buffer couldn't take any advantages.
+I think the environment is quite simple, and so the prioritiized replay buffer couldn't take any advantages.
  
 ![alt text](https://github.com/Vinssou/Banana/blob/master/score_prioritized.png)
  
 ### Test
-The out of the last cell ran with the load model
+The output of the last cell ran with the load model
 ```
 0 Eps: 0.03 Score: 18.0
 1 Eps: 0.03 Score: 17.0
